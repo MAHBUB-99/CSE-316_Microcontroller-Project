@@ -10,60 +10,67 @@
 
 ## 📌 Overview
 
-The **Third Eye for Blind** is an **Arduino-powered wearable assistive device** that helps visually impaired users by:
+**Third Eye for Blind** is an **Arduino-powered wearable assistive device** designed to enhance mobility and safety for visually impaired individuals. It provides:
 
-- Detecting nearby obstacles
-- Guiding users via **vibration feedback**
-- Providing **compass-based direction sensing**
-- Supporting **emergency alert mode**
+- 🛑 **Real-time obstacle detection** using ultrasonic sensors  
+- 📟 **Vibration-based feedback** to intuitively guide users  
+- 🧭 **Compass mode** for direction sensing (e.g., facing North)  
+- 🚨 **Emergency alert mode** activated through button input  
+
 
 ---
 
 ## 🔧 Key Features
 
-| 🧠 Module        | 🚀 Description                                                                 |
-|------------------|--------------------------------------------------------------------------------|
+| 🧠 Module              | 🚀 Description                                                                 |
+|------------------------|--------------------------------------------------------------------------------|
 | 🛑 **Obstacle Detection** | Detects objects using 3 ultrasonic sensors (Front, Left, Right).               |
-| 🧭 **Compass Mode**       | Uses HMC5883L magnetometer to guide direction; triggers alert when facing North. |
-| 🚨 **Emergency Mode**     | Sends an emergency signal when a specific condition is triggered.               |
-| 📡 **Bluetooth Serial**   | Communication via SoftwareSerial on pins 0 and 1.                              |
-| 🎮 **Sensor Switching**   | Modes (Sensor, Compass, Emergency) are switchable via digital input.           |
-| 📟 **Feedback System**    | Alerts users through two vibration motors (pins 8 and 9).                      |
+| 🧭 **Compass Mode**       | Utilizes HMC5883L magnetometer to detect direction; vibrates when facing North. |
+| 🚨 **Emergency Mode**     | Sends an emergency alert signal after a long button press.                     |
+| 📡 **Bluetooth Serial**   | Enables serial communication using SoftwareSerial (pins 0 and 1).              |
+| 🔄 **Mode Switching**      | Switches between Sensor, Compass, and Emergency modes via button input.        |
+| 📟 **Feedback System**    | Provides tactile feedback using two vibration motors (pins 8 and 9).           |
 
 ---
 
 ## ⚙️ Hardware Used
 
-| Component               | Description                                   |
-|------------------------|-----------------------------------------------|
-| Arduino Uno            | Main microcontroller                          |
-| 3x Ultrasonic Sensors  | For obstacle detection (HC-SR04)              |
-| HMC5883L Magnetometer  | For compass heading                           |
-| Vibration Motors       | For tactile feedback                          |
-| Push Button            | Mode switching input                          |
-| Bluetooth Module (optional) | For serial debugging/logging             |
+| 🧩 Component             | 🔍 Description                                   |
+|--------------------------|--------------------------------------------------|
+| 🟦 Arduino Uno           | Core microcontroller for logic and control       |
+| 📡 3× Ultrasonic Sensors | HC-SR04 sensors for obstacle detection           |
+| 🧲 HMC5883L Magnetometer | Provides compass heading via I2C communication   |
+| 🔋 Vibration Motors      | Delivers haptic feedback based on sensor data    |
+| 🔘 Push Button           | Used to switch between operating modes           |
+| 📶 Bluetooth Module      | For wireless serial debugging or data logging    |
 
 ---
 
 ## 🧠 Core Logic Summary
 
-### 1️⃣ Sensor Mode
-- Measures distances from 3 ultrasonic sensors
-- Based on thresholds:
-  - Both sides blocked → alert both vibrators
-  - Clear path → activate only one motor based on direction
-  - Distance threshold: `< 50cm` (customizable)
+### 🔍 1️⃣ Sensor Mode
+- Uses **three ultrasonic sensors** to detect obstacles: Left, Front, and Right.
+- Decision-making based on measured distances:
+  - 🚧 **Both sides blocked** → Activate **both motors** (simulate stop or alert).
+  - 🔄 **One side clearer** → Turn in that direction by activating only one motor.
+  - ✅ **Path clear** → Move forward.
+- **Threshold distance:** `MINDISTANCE = 50 cm` *(can be customized)*.
 
-### 2️⃣ Compass Mode
-- Reads magnetometer via I2C
-- Converts vector data to compass heading
-- Alerts user when facing **North** (0° ± 20°)
-- After 3 alerts → returns to Sensor Mode
+---
 
-### 3️⃣ Emergency Mode
-- Activated after a long button press
-- Sends alert signal
-- Waits 10 seconds before returning to Sensor Mode
+### 🧭 2️⃣ Compass Mode
+- Reads magnetic field using the **HMC5883L magnetometer** (I2C).
+- Converts sensor vector data into **heading angle (in degrees)**.
+- 🔔 Triggers **vibration alert** when facing near **North** (within `0° ± 20°`).
+- 🕒 After **3 consecutive North detections**, it switches back to **Sensor Mode**.
+
+---
+
+### 🚨 3️⃣ Emergency Mode
+- Activated by a **long button press** (after initial short press).
+- Sends a **special alert signal** via serial.
+- ⏳ Waits for **10 seconds**, then automatically returns to **Sensor Mode**.
+
 
 ---
 
@@ -83,13 +90,10 @@ The **Third Eye for Blind** is an **Arduino-powered wearable assistive device** 
 - **Real-Time Sensor Fusion**
 
 ---
+## 🙌 Credits
 
-## 🤝 Credits
+Developed with :
 
-Developed with ❤️ [Ruhul Azgor] [Sweekyoching Marma]
+- 🎓 **Ruhul Azgor**  
+- 🌟 **Sweekyoching Marma**
 
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE)
