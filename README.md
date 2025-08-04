@@ -67,26 +67,10 @@ The **Third Eye for Blind** is an **Arduino-powered wearable assistive device** 
 
 ---
 
-## 💻 Code Snippet
 
-```cpp
-if (FrontSensor < MINDISTANCE) {
-    if (RightSensor < MINDISTANCE && LeftSensor < MINDISTANCE) {
-        digitalWrite(8, HIGH); // Vibrate both
-    } else if (RightSensor > LeftSensor) {
-        digitalWrite(9, HIGH); // Vibrate right
-    } else {
-        digitalWrite(8, HIGH); // Vibrate left
-    }
-}
-```
-
----
-
-## 🎥 Demo Video & Repository
+## 🎥 Demo Video
 
 - 🔗 [Demo Video](https://youtu.be/RtrROTO9bsk?si=J1tAzmDtqypnOe6Z)
-- 🧾 [GitHub Repo](https://github.com/your-username/ThirdEyeForBlind)
 
 ---
 
@@ -100,18 +84,9 @@ if (FrontSensor < MINDISTANCE) {
 
 ---
 
-## 💡 Future Improvements
-
-- Add **buzzer alerts**
-- GPS integration for **location tracking**
-- Real-time mobile app integration via Bluetooth
-- Rechargeable power unit with battery monitoring
-
----
-
 ## 🤝 Credits
 
-Developed with ❤️ by [Your Name]
+Developed with ❤️ [Ruhul Azgor] [Sweekyoching Marma]
 
 ---
 
